@@ -62,7 +62,6 @@ function drag_Drop(event)
     var reader = new FileReader();
     reader.onload = function(e) {
 		var image = e.target.result.split(',')[1];
-        alert($);
         jQuery.ajax({
             url: 'http://api.imgur.com/2/upload.json',
             type: 'POST',

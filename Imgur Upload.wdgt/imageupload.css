@@ -1,0 +1,201 @@
+body {
+	color: #494949;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: Myriad, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+#front {
+	position: absolute;
+	display: block;
+	top: 0px;
+	left: 0px;
+	width: 102px;
+	height: 102px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("images/background.png");
+}
+
+#uploading-container {
+	position: absolute;
+	opacity: 0;
+	top: 0px;
+	left: 0px;
+	width: 102px;
+	height: 102px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("images/background-uploading.png");
+}
+
+#interact {
+	width: 102px;
+	height: 102px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 6000;
+}
+
+#drop-container {
+	position: absolute;
+	display: block;
+	opacity: 0;
+	top: 0px;
+	left: 0px;
+	width: 102px;
+	height: 102px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1;
+	background: url("images/background-hover.png") top left no-repeat;
+}
+
+#drop {
+	width: 92px;
+	height: 92px;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	display: block;
+	opacity: 1;
+	z-index: 3;
+	background: url("images/drop.png") top left no-repeat;
+}
+
+#done-container {
+	position: absolute;
+	opacity: 0;
+	top: 0px;
+	left: 0px;
+	width: 102px;
+	height: 102px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("images/background-done.png");
+}
+
+#done {
+	height: 32px;
+	opacity: 0;
+	width: 34px;
+	position: absolute;
+	top: 45px;
+	left:35px;
+	background: url("images/done.png") top left no-repeat;
+}
+
+#preload {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: none;
+}
+
+#async {
+	position: absolute;
+	opacity: 0;
+	top: 45px;
+	left:35px;
+	height: 32px;
+	width: 32px;
+}
+
+#crawlies {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	height: 86px;
+	width: 86px;
+	z-index: 2;
+}
+
+.flip {
+	position:absolute;
+	top: 15px;
+	right: 15px;
+	width:13px;
+	height:13px;
+}
+
+#flip {
+	opacity:0;
+	background: url(images/flip.png) no-repeat top left;
+	z-index:8000;
+}
+
+#fliprollie {
+	display:none;
+	opacity:0.25;
+	background: url(file:///System/Library/WidgetResources/ibutton/white_rollie.png) no-repeat top left;
+	z-index:7999;
+}
+
+#back {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 102px;
+	height: 102px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("images/backside.png");
+	text-align: center;
+}
+
+#back a {
+	font: 10px "Helvetica Neue";
+	font-weight: bold;
+	color:white;
+	text-decoration: none;
+}
+
+#crush-text {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+#sound-text {
+	position: absolute;
+	top: 28px;
+	left: 10px;
+}
+
+#growl-text {
+	position: absolute;
+	top: 46px;
+	left: 10px;
+}
+
+.checkbox-caption {
+	font: 10px "Helvetica Neue";
+	font-weight: bold;
+	color:white;
+}
+
+#done-button {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	background: url("images/button.png") top left no-repeat;
+	width: 50px;
+	height: 23px;
+	background-position:0px 0px;
+}
+
+#done-button:active {
+	background: url("images/button.png") top left no-repeat;
+	background-position:0px 23px;
+}
+
+#mc-logo {
+	position: absolute;
+	bottom: 16px;
+	left: 13px;
+}

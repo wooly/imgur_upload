@@ -1,16 +1,10 @@
-var str_FilePath;
-var str_FileName;
-var str_FileNameExt;
-var str_FileExt;
-
-var str_ImgURL;
+var image_url;
 
 var m_ProAnimation = null;
 var m_ComUpload = null;
 
 var is_Uploading = false;
 var is_Complete = false;
-var is_Downloaded = false;
 
 var dashboardOpen = false;
 
@@ -53,7 +47,6 @@ function widgetHide()
 	dashboardOpen = false;
 }
 
-
 /* Drag & Drop */
 
 function drag_Drop(event)
@@ -65,38 +58,32 @@ function drag_Drop(event)
 	event.stopPropagation();
 	event.preventDefault();
 	Effect.Fade('drop', {duration: .5});
-		
-	try
-	{
-		str_FilePath = event.dataTransfer.getData("text/uri-list");
-		str_FilePath = str_FilePath.replace(/%20/g, ' ');
-		str_FileName = str_FilePath.substring(str_FilePath.lastIndexOf('/') + 1, str_FilePath.lastIndexOf('.'));
-		str_FileNameExt = str_FilePath.substring(str_FilePath.lastIndexOf('/') + 1, str_FilePath.length);
-		/* str_FileNameExt = str_FileNameExt.charAt(0).toUpperCase() + str_FileNameExt.slice(1); */
-		str_FileExt = str_FilePath.substring(str_FilePath.lastIndexOf('.') + 1, str_FilePath.length);
-		str_FileExt = str_FileExt.toLowerCase();
-		if (!util_validExt(str_FileExt))
-		{
-			throw RangeError('invalid image');
-		}
-		if (str_FilePath.match('http://'))
-		{
-			var command = '/usr/bin/curl "' + str_FilePath + '" > imageuploadimage.' + str_FileExt;
-			var download = widget.system(command, null);
-			str_FilePath = 'imageuploadimage.' + str_FileExt;
-			is_Downloaded = true;
-		} else {
-			if (str_FilePath.match('file://localhost'))
-			{
-				str_FilePath = str_FilePath.substring(16, str_FilePath.length);
-			}
-			
-		}		
-		setTimeout('upload_Init();', 100);
-	} catch (e) {
-		is_Downloaded = false;
-		return;
-	}
+    
+    var reader = new FileReader();
+    reader.onload = function(e) {
+		var image = e.target.result.split(',')[1];
+        alert($);
+        jQuery.ajax({
+            url: 'http://api.imgur.com/2/upload.json',
+            type: 'POST',
+            data: {
+                type: 'base64',
+                key: '58584eba731a360f7d0b78c30e5a8d5f',
+                name: 'neon.jpg',
+                title: 'test title',
+                caption: 'test caption',
+                image: image
+            },
+            dataType: 'json'
+        }).success(function(data) {
+            image_url = data.upload.links.original;
+            setTimeout('upload_Init();', 100);
+        }).error(function() {
+            image_url = 'Could not reach api.imgur.com. Sorry :(';
+            setTimeout('upload_Init();', 100);
+        });
+    }
+    reader.readAsDataURL(event.dataTransfer.files[0]);
 }
 
 function drag_Enter(event)
@@ -163,11 +150,10 @@ function upload_Init()
 	m_CrawlAnimation.stop();
 	Effect.Appear('uploading-container', {duration: .5});
 	is_Uploading = true;
-	str_ImgURL = null;
 	m_ProAnimation = new ProgressIndicator(document.getElementById('async'), "images/async/prog");
 	m_ProAnimation.start();
 	Effect.Appear('async', {duration: .5});
-	var command = './imgur-upload.sh "'+str_FilePath+'"';
+	var command = './imgur-upload.sh "'+ image_url +'"';
 	m_ComUpload = widget.system(command, upload_Done);
 }
 
